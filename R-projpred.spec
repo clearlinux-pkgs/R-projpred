@@ -4,7 +4,7 @@
 #
 Name     : R-projpred
 Version  : 2.2.1
-Release  : 21
+Release  : 22
 URL      : https://cran.r-project.org/src/contrib/projpred_2.2.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/projpred_2.2.1.tar.gz
 Summary  : Projection Predictive Feature Selection
