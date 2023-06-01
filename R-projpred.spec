@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-projpred
-Version  : 2.5.0
-Release  : 28
-URL      : https://cran.r-project.org/src/contrib/projpred_2.5.0.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/projpred_2.5.0.tar.gz
+Version  : 2.6.0
+Release  : 29
+URL      : https://cran.r-project.org/src/contrib/projpred_2.6.0.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/projpred_2.6.0.tar.gz
 Summary  : Projection Predictive Feature Selection
 Group    : Development/Tools
 License  : GPL-3.0
@@ -23,7 +23,7 @@ Requires: R-mclogit
 Requires: R-mvtnorm
 Requires: R-ordinal
 Requires: R-rstantools
-Requires: R-ucminf
+Requires: R-scales
 BuildRequires : R-Rcpp
 BuildRequires : R-RcppArmadillo
 BuildRequires : R-abind
@@ -35,7 +35,7 @@ BuildRequires : R-mclogit
 BuildRequires : R-mvtnorm
 BuildRequires : R-ordinal
 BuildRequires : R-rstantools
-BuildRequires : R-ucminf
+BuildRequires : R-scales
 BuildRequires : buildreq-R
 # Suppress stripping binaries
 %define __strip /bin/true
@@ -54,16 +54,19 @@ lib components for the R-projpred package.
 
 %prep
 %setup -q -n projpred
+pushd ..
+cp -a projpred buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680727355
+export SOURCE_DATE_EPOCH=1685646119
 
 %install
-export SOURCE_DATE_EPOCH=1680727355
+export SOURCE_DATE_EPOCH=1685646119
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -101,6 +104,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
 R CMD check --no-manual --no-examples --no-codoc . || :
 
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -141,9 +145,10 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/projpred/html/R.css
 /usr/lib64/R/library/projpred/tests/testthat.R
 /usr/lib64/R/library/projpred/tests/testthat/helpers/args.R
+/usr/lib64/R/library/projpred/tests/testthat/helpers/dummies.R
 /usr/lib64/R/library/projpred/tests/testthat/helpers/formul_handlers.R
 /usr/lib64/R/library/projpred/tests/testthat/helpers/getters.R
-/usr/lib64/R/library/projpred/tests/testthat/helpers/revIA.R
+/usr/lib64/R/library/projpred/tests/testthat/helpers/predictor_handlers.R
 /usr/lib64/R/library/projpred/tests/testthat/helpers/testers.R
 /usr/lib64/R/library/projpred/tests/testthat/helpers/unlist_cust.R
 /usr/lib64/R/library/projpred/tests/testthat/setup.R
