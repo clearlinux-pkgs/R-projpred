@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-projpred
-Version  : 2.6.0
-Release  : 30
-URL      : https://cran.r-project.org/src/contrib/projpred_2.6.0.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/projpred_2.6.0.tar.gz
+Version  : 2.7.0
+Release  : 31
+URL      : https://cran.r-project.org/src/contrib/projpred_2.7.0.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/projpred_2.7.0.tar.gz
 Summary  : Projection Predictive Feature Selection
 Group    : Development/Tools
 License  : GPL-3.0
@@ -17,6 +17,7 @@ Requires: R-RcppArmadillo
 Requires: R-abind
 Requires: R-gamm4
 Requires: R-ggplot2
+Requires: R-gtools
 Requires: R-lme4
 Requires: R-loo
 Requires: R-mclogit
@@ -29,6 +30,7 @@ BuildRequires : R-RcppArmadillo
 BuildRequires : R-abind
 BuildRequires : R-gamm4
 BuildRequires : R-ggplot2
+BuildRequires : R-gtools
 BuildRequires : R-lme4
 BuildRequires : R-loo
 BuildRequires : R-mclogit
@@ -63,19 +65,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685646119
+export SOURCE_DATE_EPOCH=1696265698
 
 %install
-export SOURCE_DATE_EPOCH=1685646119
+export SOURCE_DATE_EPOCH=1696265698
 rm -rf %{buildroot}
-export LANG=C.UTF-8
-export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
-export AR=gcc-ar
-export RANLIB=gcc-ranlib
-export LDFLAGS="$LDFLAGS  -Wl,-z -Wl,relro"
+LANG=C.UTF-8
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -flto -fno-semantic-interposition "
+FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -flto -fno-semantic-interposition "
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -flto -fno-semantic-interposition "
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -flto -fno-semantic-interposition "
+AR=gcc-ar
+RANLIB=gcc-ranlib
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS  -Wl,-z -Wl,relro"
 mkdir -p %{buildroot}/usr/lib64/R/library
 
 mkdir -p ~/.R
